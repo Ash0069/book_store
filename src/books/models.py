@@ -40,16 +40,19 @@ class Book(models.Model):
         if not self.book_id:
             self.book_id = str(uuid.uuid4()).replace("-", "")[:24].lower()
 
-        # # qrcode_img = qrcode.make('Hello')
-        # # qrcode_img.save('1.png')
-        # qrcode_img = qrcode.make(self.book_id)
-        # fname = f'qr_code-{self.title}.png'
-        # buffer = BytesIO()
-        # self.qr_code.save(fname, File(buffer), save=False)
+        #qrcode
+        qr = qrcode.QRCode(version = 1, box_size = 10, border = 5)
 
-        # canvas = Image.new('RGB', (200, 200), 'white')
-        # canvas.paste(qrcode_img)
-        # canvas.save(buffer, 'PNG')
-        # canvas.close()
+        qr.add_data(self.book_id)
+
+        qr.make(fit = True)
+        img = qr.make_image(fill_color = 'black', back_color = 'white')
+
+        buffer = BytesIO()
+        img.save(buffer, format='PNG')
+        buffer.seek(0)
+
+        file_name = f'qr_code-{self.book_id}.png'
+        self.qr_code.save(file_name, File(buffer), save=False)
 
         super().save(*args, **kwargs)
