@@ -4,6 +4,7 @@ from authors.models import Author
 from django.utils.text import slugify
 import uuid
 #imports for qrcode
+from django.urls import reverse
 import qrcode
 from io import BytesIO
 from django.core.files import File
@@ -17,6 +18,13 @@ class BookTitle(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def books(self):
+        return self.book_set.all()
+
+    def get_absolute_url(self):
+        return reverse('books:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f'Book : {self.title}'

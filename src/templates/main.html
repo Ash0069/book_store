@@ -3,11 +3,13 @@
 {% block title %}hello{% endblock title %}
 
 {% block content %}
+{{obj.title}}
+<br>
 
-{% if obj %}
+{% if qs %}
     <ul>
     {% for obj in qs %}
-        <li>{{obj.first_name}}, {{obj.last_name}}</li>
+        <li>{{obj.first_name}}, {{obj.last_name}} {{obj.username}}</li>
     {% endfor %}
     </ul>
 {% else %}

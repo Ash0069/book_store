@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block title %}book detail{% endblock title %}
+
+{% block content %}
+    <h1>title : {{obj.title}}</h1>
+    <br>
+    <a href="{% url 'books:main' %}" class="btn btn-danger">Go back</a>
+{% endblock content %}
