@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from customers.models import Customer
 
 def home_view(request):
-    return render(request, 'index.html', {})
+    qs = Customer.objects.all()
+    return render(request, 'main.html', {'key_value' : qs})

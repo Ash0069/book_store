@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block title %}hello{% endblock title %}
+
+{% block content %}
+
+{% if obj %}
+    <ul>
+    {% for obj in qs %}
+        <li>{{obj.first_name}}, {{obj.last_name}}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    no customers in the db
+{% endif %}
+
+{% endblock content %}
