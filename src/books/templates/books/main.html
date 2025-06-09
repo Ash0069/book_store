@@ -101,6 +101,7 @@
         <a href="{% url 'books:main' letter|lower %}" class="{% if letter == selected_letter|upper %}underline{% endif %} hover:underline transition duration-200">{{letter}}</a>
     {% endfor %}
 
+    <br>
     {% if qs %}
         <ul>
             {% for el in qs %}
@@ -110,4 +111,5 @@
     {% else %}
         no book titles starting with <b>{{selected_letter|upper}}</b>
     {% endif %}
+    </br>
 {% endblock content %}
